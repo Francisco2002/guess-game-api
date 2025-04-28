@@ -5,6 +5,7 @@ import { Server } from "socket.io";
 import cors from "cors";
 import { getRooms } from './controllers/getRooms';
 import { createRoom } from './controllers/createRoom';
+import { handleConnect, handleDisconnect } from './events/connection';
 
 const app = express();
 app.use(json());
@@ -27,6 +28,9 @@ const io = new Server(httpServer, {
 });
 
 io.on("connection", socket => {
+  handleConnect(socket);
+  handleDisconnect(socket);
+
   socket.emit("connected");
 });
 
