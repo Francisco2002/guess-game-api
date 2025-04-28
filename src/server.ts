@@ -3,6 +3,8 @@ import { createServer } from "http";
 import { connect } from 'mongoose';
 import { Server } from "socket.io";
 import cors from "cors";
+import { getRooms } from './controllers/getRooms';
+import { createRoom } from './controllers/createRoom';
 
 const app = express();
 app.use(json());
@@ -36,5 +38,8 @@ connect(mongoUrl).then(() => console.log('MongoDB conectado'))
 app.get("/", (req, res) => {
   res.json({ message: "Hello World!" })
 });
+
+app.get("/room", getRooms);
+app.post("/room", createRoom);
 
 httpServer.listen(3000, () => console.log('API rodando na porta 3000'));
