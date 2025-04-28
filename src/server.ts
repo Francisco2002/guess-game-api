@@ -6,6 +6,8 @@ import cors from "cors";
 import { getRooms } from './controllers/getRooms';
 import { createRoom } from './controllers/createRoom';
 import { handleConnect, handleDisconnect } from './events/connection';
+import { joinRoom } from './events/room';
+import { sendMessage } from './events/game';
 
 const app = express();
 app.use(json());
@@ -30,6 +32,8 @@ const io = new Server(httpServer, {
 io.on("connection", socket => {
   handleConnect(socket);
   handleDisconnect(socket);
+  joinRoom(socket, io);
+  sendMessage(socket, io);
 
   socket.emit("connected");
 });
