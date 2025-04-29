@@ -7,7 +7,7 @@ import { getRooms } from './controllers/getRooms';
 import { createRoom } from './controllers/createRoom';
 import { handleConnect, handleDisconnect } from './events/connection';
 import { joinRoom } from './events/room';
-import { nextTurnPlayer, sendMessage, startGame } from './events/game';
+import { defineRoomSecret, makeGuess, nextTurnPlayer, sendMessage, startGame } from './events/game';
 
 const app = express();
 app.use(json());
@@ -36,6 +36,8 @@ io.on("connection", socket => {
   sendMessage(socket, io);
   startGame(socket, io);
   nextTurnPlayer(socket, io);
+  defineRoomSecret(socket);
+  makeGuess(socket);
 
   socket.emit("connected");
 });
