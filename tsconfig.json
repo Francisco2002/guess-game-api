@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES6",                 // O código JavaScript gerado será ES6
+    "module": "CommonJS",            // Use CommonJS (compatível com Node)
+    "outDir": "./dist",              // Saída dos arquivos compilados em 'dist'
+    "rootDir": "./src",              // Diretório de código-fonte
+    "esModuleInterop": true,         // Permite importações de módulos ES6
+    "strict": true,                  // Habilita todas as verificações rigorosas
+    "skipLibCheck": true,            // Ignora a verificação de tipos em arquivos de definição de bibliotecas
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src/**/*.ts"                    // Inclui todos os arquivos TS na pasta 'src'
+  ],
+  "exclude": [
+    "node_modules"                   // Exclui a pasta 'node_modules'
+  ]
+}
