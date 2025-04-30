@@ -1,0 +1,25 @@
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - "27017:27017"
+
+  api:
+    build: .
+    container_name: node_api
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO_URL=${MONGO_URL}
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+
+
+volumes:
+  mongodb_data:
